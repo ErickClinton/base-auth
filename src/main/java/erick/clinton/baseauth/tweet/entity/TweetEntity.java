@@ -17,6 +17,8 @@ public class TweetEntity {
 
     private String content;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private UserEntity user;
 
     @CreationTimestamp
