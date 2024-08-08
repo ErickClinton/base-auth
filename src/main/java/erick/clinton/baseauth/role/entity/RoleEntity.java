@@ -12,6 +12,13 @@ public class RoleEntity {
 
     private String name;
 
+    public RoleEntity() {}
+
+    public RoleEntity(Long id, String name){
+        this.id = id;
+        this.name = name;
+    }
+
     public Long getId() {
         return id;
     }
@@ -29,17 +36,23 @@ public class RoleEntity {
     }
 
     public enum ValuesEnum{
-        BASIC(1L),
-        ADMIN(2L);
+        BASIC(1L,"BASIC"),
+        ADMIN(2L,"ADMIN");
 
-        long roleId;
+        private final long id;
+        private final String name;
 
-        ValuesEnum(long roleId){
-            this.roleId = roleId;
+        ValuesEnum(long id, String name){
+            this.id = id;
+            this.name = name;
         }
 
-        public long getRoleId() {
-            return roleId;
+        public RoleEntity get(){
+            return new RoleEntity(id,name);
+        }
+
+        public long getId() {
+            return id;
         }
     }
 }
