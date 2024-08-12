@@ -39,8 +39,8 @@ public class LoginService {
         var claims = JwtClaimsSet.builder()
                 .issuer("api")
                 .subject(user.getId().toString())
+                .issuedAt(now)
                 .expiresAt(now.plusSeconds(expiresIn))
-                .issuedAt(now.plusSeconds(expiresIn))
                 .build();
 
 
