@@ -1,7 +1,9 @@
 package erick.clinton.baseauth.user.entity;
 
+import erick.clinton.baseauth.login.dto.LoginRequest;
 import erick.clinton.baseauth.role.entity.RoleEntity;
 import jakarta.persistence.*;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Set;
 import java.util.UUID;
@@ -58,5 +60,9 @@ public class UserEntity {
 
     public void setRoles(Set<RoleEntity> roles) {
         this.roles = roles;
+    }
+
+    public boolean isLogginCorrect(LoginRequest loginRequest, PasswordEncoder passwordEncoder){
+        return passwordEncoder.matches(loginRequest.password(),this.password);
     }
 }
