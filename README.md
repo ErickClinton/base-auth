@@ -17,7 +17,7 @@ Este projeto implementa a autenticação utilizando OAuth 2.0, garantindo uma es
 1. **Clone o Repositório**:
 
     ```bash
-    git clone https://github.com/seu-usuario/nome-do-repositorio.git
+    https://github.com/ErickClinton/base-auth
     ```
 
 2. **Instale as Dependências**:
