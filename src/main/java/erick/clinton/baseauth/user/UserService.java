@@ -13,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -45,5 +46,9 @@ public class UserService {
         userRepository.save(user);
 
         return ResponseEntity.ok().build();
+    }
+
+    public ResponseEntity<List<UserEntity>> getAll(){
+        return ResponseEntity.ok(userRepository.findAll());
     }
 }
