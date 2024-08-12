@@ -1,5 +1,7 @@
 package erick.clinton.baseauth.user;
 
+import erick.clinton.baseauth.client.notification.SendEmailService;
+import erick.clinton.baseauth.client.notification.entity.EmailEntity;
 import erick.clinton.baseauth.role.entity.RoleEntity;
 import erick.clinton.baseauth.role.repository.RoleRepository;
 import erick.clinton.baseauth.user.dto.CreateUserDto;
@@ -15,6 +17,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.CompletableFuture;
 
 @Service
 @Transactional
@@ -23,11 +26,13 @@ public class UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final SendEmailService sendEmailService;
 
-    public UserService(UserRepository userRepository, RoleRepository roleRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public UserService(UserRepository userRepository, RoleRepository roleRepository, BCryptPasswordEncoder bCryptPasswordEncoder, SendEmailService sendEmailService) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.sendEmailService = sendEmailService;
     }
 
     public ResponseEntity<Void> register(CreateUserDto createUserDto) {
@@ -45,6 +50,13 @@ public class UserService {
         user.setRoles(Set.of(basicRole));
         userRepository.save(user);
 
+        var email = new EmailEntity();
+        email.setFrom("");
+        email.setTo("");
+        email.setSubject("");
+        email.setText("");
+
+        CompletableFuture.runAsync(()->this.sendEmailService.sendEmail(email));
         return ResponseEntity.ok().build();
     }
 
