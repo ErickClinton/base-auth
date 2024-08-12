@@ -48,10 +48,11 @@ O projeto inclui um endpoint `/login` para autenticação, que utiliza os seguin
 - **Response**
    - Campos: `accesToken` (String), `expiresIn` (Long)
 
-O projeto inclui um endpoint `/user/register` para criação de usuários, que utiliza os seguintes DTOs:
+O projeto inclui um endpoint `/user/register` para criação de usuários, e dispara um email para o usuário.  que utiliza os seguintes DTOs:
 
 - **Request**
    - Campos: `username` (String), `password` (String)
+
 
 ## Roles
 
